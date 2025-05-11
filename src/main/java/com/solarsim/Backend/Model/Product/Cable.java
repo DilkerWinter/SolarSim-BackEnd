@@ -20,4 +20,27 @@ public class Cable extends Product{
 
     }
 
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public double getSizeInMeters() {
+        return sizeInMeters;
+    }
+
+    public void setSizeInMeters(double sizeInMeters) {
+        this.sizeInMeters = sizeInMeters;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }

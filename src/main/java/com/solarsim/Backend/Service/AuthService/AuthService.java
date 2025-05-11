@@ -1,6 +1,6 @@
-package com.solarsim.Backend.Service;
+package com.solarsim.Backend.Service.AuthService;
 
-import com.solarsim.Backend.Repository.UserRepository;
+import com.solarsim.Backend.Repository.UserRepository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -1,7 +1,7 @@
 package com.solarsim.Backend.Config;
 
-import com.solarsim.Backend.Repository.UserRepository;
-import com.solarsim.Backend.Service.TokenService;
+import com.solarsim.Backend.Repository.UserRepository.UserRepository;
+import com.solarsim.Backend.Service.AuthService.TokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

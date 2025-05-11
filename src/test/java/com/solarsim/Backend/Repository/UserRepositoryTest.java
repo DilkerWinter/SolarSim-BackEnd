@@ -3,6 +3,7 @@ package com.solarsim.Backend.Repository;
 import com.solarsim.Backend.Model.User.UserDTO.RegisterDTO;
 import com.solarsim.Backend.Model.User.User;
 import com.solarsim.Backend.Model.User.UserRole;
+import com.solarsim.Backend.Repository.UserRepository.UserRepository;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

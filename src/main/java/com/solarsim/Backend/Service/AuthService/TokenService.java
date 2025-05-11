@@ -1,4 +1,4 @@
-package com.solarsim.Backend.Service;
+package com.solarsim.Backend.Service.AuthService;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;

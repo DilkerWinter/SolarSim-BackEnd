@@ -10,6 +10,6 @@ public class ConectorMc4 extends Product {
     }
 
     public ConectorMc4() {
-
+        super();
     }
 }
