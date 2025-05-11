@@ -8,7 +8,16 @@ public class Cable extends Product{
     private double sizeInMeters;
     private String type ;
 
-    public void calculateSizeBySolarPanel(int solarPanelQuantity){
-        this.sizeInMeters = solarPanelQuantity * 3;
+    public Cable(String name, String description, Integer price,
+                 String brand, double sizeInMeters, String type) {
+        super(name, description, price);
+        this.brand = brand;
+        this.sizeInMeters = sizeInMeters;
+        this.type = type;
     }
+
+    public Cable() {
+
+    }
+
 }

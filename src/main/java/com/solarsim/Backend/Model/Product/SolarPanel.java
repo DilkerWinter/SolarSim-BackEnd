@@ -2,6 +2,8 @@ package com.solarsim.Backend.Model.Product;
 
 import jakarta.persistence.Entity;
 
+import java.util.Objects;
+
 @Entity
 public class SolarPanel extends Product {
     private double potencyKiloWatts;
@@ -16,6 +18,42 @@ public class SolarPanel extends Product {
         this.potencyKiloWatts = potencyKiloWatts;
         this.potencyVoltage = potencyVoltage;
         this.height = height;
+        this.width = width;
+    }
+
+    public SolarPanel() {
+
+    }
+
+    public double getPotencyKiloWatts() {
+        return potencyKiloWatts;
+    }
+
+    public void setPotencyKiloWatts(double potencyKiloWatts) {
+        this.potencyKiloWatts = potencyKiloWatts;
+    }
+
+    public double getPotencyVoltage() {
+        return potencyVoltage;
+    }
+
+    public void setPotencyVoltage(double potencyVoltage) {
+        this.potencyVoltage = potencyVoltage;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    public void setWidth(double width) {
         this.width = width;
     }
 }
