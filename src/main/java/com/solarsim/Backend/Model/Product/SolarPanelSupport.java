@@ -1,6 +1,9 @@
 package com.solarsim.Backend.Model.Product;
 
-public class SuportePlacaSolar {
+import jakarta.persistence.Entity;
+
+@Entity
+public class SolarPanelSupport extends Product {
     private String type;
     private Integer capacity;
 }

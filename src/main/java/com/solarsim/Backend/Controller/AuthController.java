@@ -1,8 +1,8 @@
 package com.solarsim.Backend.Controller;
 
-import com.solarsim.Backend.Model.User.AuthDTO;
-import com.solarsim.Backend.Model.User.LoginResponseDTO;
-import com.solarsim.Backend.Model.User.RegisterDTO;
+import com.solarsim.Backend.Model.User.UserDTO.AuthDTO;
+import com.solarsim.Backend.Model.User.UserDTO.LoginResponseDTO;
+import com.solarsim.Backend.Model.User.UserDTO.RegisterDTO;
 import com.solarsim.Backend.Model.User.User;
 import com.solarsim.Backend.Repository.UserRepository;
 import com.solarsim.Backend.Service.TokenService;
@@ -38,7 +38,7 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity register(@RequestBody @Valid RegisterDTO data) {
-        if(this.userRepository.findByEmail(data.email()) != null) return ResponseEntity.badRequest().build();
+        if(this.userRepository.findUserDetailsByEmail(data.email()) != null) return ResponseEntity.badRequest().build();
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
         User newUser = new User(data.name(), data.email(), encryptedPassword, data.role());

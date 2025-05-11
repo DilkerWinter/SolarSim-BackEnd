@@ -1,6 +1,9 @@
 package com.solarsim.Backend.Model.Product;
 
-public class SolarPainel {
+import jakarta.persistence.Entity;
+
+@Entity
+public class SolarPanel extends Product {
     private double potencyKiloWatts;
     private double potencyVoltage;
     private double height;

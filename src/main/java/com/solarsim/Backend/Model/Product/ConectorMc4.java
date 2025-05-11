@@ -1,4 +1,7 @@
 package com.solarsim.Backend.Model.Product;
 
-public class ConectorMc4 {
+import jakarta.persistence.Entity;
+
+@Entity
+public class ConectorMc4 extends Product {
 }

@@ -13,8 +13,6 @@ import java.util.List;
 
 @Table(name = "users")
 @Entity(name = "users")
-@Getter
-@AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class User implements UserDetails {
 
@@ -31,6 +29,7 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
+    //Constructors
     public User(String name, String email, String password, UserRole role) {
         this.name = name;
         this.email = email;
@@ -41,7 +40,20 @@ public class User implements UserDetails {
     public User() {
     }
 
+    //Getters
+    public String getEmail() {
+        return email;
+    }
 
+    public String getName() {
+        return name;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    //Part of the UserDetails Class
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if(this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));

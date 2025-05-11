@@ -1,14 +1,11 @@
 package com.solarsim.Backend.Service;
 
-import com.solarsim.Backend.Model.User.User;
 import com.solarsim.Backend.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class AuthService implements UserDetailsService {
@@ -22,7 +19,7 @@ public class AuthService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserDetails user = userRepository.findByEmail(username);
+        UserDetails user = userRepository.findUserDetailsByEmail(username);
         if (user == null) {
             throw new UsernameNotFoundException("User not found with email: " + username);
         }
