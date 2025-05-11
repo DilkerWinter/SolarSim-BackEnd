@@ -1,6 +1,6 @@
 package com.solarsim.Backend.Model.Product.ProductDTO;
 
-import com.solarsim.Backend.Model.Product.ProductType;
+import com.solarsim.Backend.Model.Product.ProductType.ProductType;
 
 import java.util.Map;
 

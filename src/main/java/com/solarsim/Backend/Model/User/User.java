@@ -1,9 +1,6 @@
 package com.solarsim.Backend.Model.User;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,7 +10,6 @@ import java.util.List;
 
 @Table(name = "users")
 @Entity(name = "users")
-@EqualsAndHashCode(of = "id")
 public class User implements UserDetails {
 
     @Id

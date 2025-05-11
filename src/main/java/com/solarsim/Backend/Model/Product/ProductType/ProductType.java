@@ -1,4 +1,4 @@
-package com.solarsim.Backend.Model.Product;
+package com.solarsim.Backend.Model.Product.ProductType;
 
 public enum ProductType {
     CABLE("cable"),
