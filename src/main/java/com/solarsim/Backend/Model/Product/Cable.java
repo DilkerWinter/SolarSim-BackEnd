@@ -2,17 +2,15 @@ package com.solarsim.Backend.Model.Product;
 
 import jakarta.persistence.Entity;
 
+import java.util.Map;
+
 @Entity
 public class Cable extends Product{
-    private String brand;
-    private double sizeInMeters;
     private String type ;
 
-    public Cable(String name, String description, Integer price,
-                 String brand, double sizeInMeters, String type) {
-        super(name, description, price);
-        this.brand = brand;
-        this.sizeInMeters = sizeInMeters;
+    public Cable(String name, String description, Integer price,String brand,
+                 String type) {
+        super(name, description, price, brand);
         this.type = type;
     }
 
@@ -20,21 +18,6 @@ public class Cable extends Product{
 
     }
 
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    public double getSizeInMeters() {
-        return sizeInMeters;
-    }
-
-    public void setSizeInMeters(double sizeInMeters) {
-        this.sizeInMeters = sizeInMeters;
-    }
 
     public String getType() {
         return type;
@@ -43,4 +26,5 @@ public class Cable extends Product{
     public void setType(String type) {
         this.type = type;
     }
+
 }

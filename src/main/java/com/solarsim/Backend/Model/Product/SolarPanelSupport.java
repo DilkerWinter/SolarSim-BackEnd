@@ -7,8 +7,9 @@ public class SolarPanelSupport extends Product {
     private String type;
     private Integer maxCapacity;
 
-    public SolarPanelSupport(String name, String description, Integer price, String type, Integer maxCapacity){
-        super(name, description, price);
+    public SolarPanelSupport(String name, String description, Integer price, String brand,
+                             String type, Integer maxCapacity){
+        super(name, description, price, brand);
         this.type = type;
         this.maxCapacity = maxCapacity;
     }

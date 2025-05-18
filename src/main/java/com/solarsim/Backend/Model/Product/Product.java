@@ -5,6 +5,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @MappedSuperclass
 public abstract class Product {
     @Id
@@ -13,11 +16,13 @@ public abstract class Product {
     private String name;
     private String description;
     private Integer price;
+    private String brand;
 
-    public Product(String name, String description, Integer price) {
+    public Product(String name, String description, Integer price, String brand) {
         this.name = name;
         this.description = description;
         this.price = price;
+        this.brand = brand;
     }
 
     public Product() {
@@ -49,5 +54,13 @@ public abstract class Product {
 
     public void setPrice(Integer price) {
         this.price = price;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 }

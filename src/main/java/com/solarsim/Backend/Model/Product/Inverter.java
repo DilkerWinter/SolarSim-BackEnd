@@ -1,17 +1,21 @@
 package com.solarsim.Backend.Model.Product;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
 @Entity
 public class Inverter extends Product {
-    private double maxPotencyKw;
-    private String exitPotencyV;
-    private String entryPotencyV;
+    @Column(name = "max_potency_kw ")
+    private Integer maxPotencyKw;
+    @Column(name = "exit_potency_v")
+    private Integer exitPotencyV;
+    @Column(name = "entry_potency_v")
+    private Integer entryPotencyV;
     private String type;
 
-    public Inverter(String name, String description, Integer price,
-                    double maxPotencyKw, String exitPotencyV, String entryPotencyV, String type) {
-        super(name, description, price);
+    public Inverter(String name, String description, Integer price, String brand,
+                    Integer maxPotencyKw, Integer exitPotencyV, Integer entryPotencyV, String type) {
+        super(name, description, price, brand);
         this.maxPotencyKw = maxPotencyKw;
         this.exitPotencyV = exitPotencyV;
         this.entryPotencyV = entryPotencyV;
@@ -22,27 +26,27 @@ public class Inverter extends Product {
 
     }
 
-    public double getMaxPotencyKw() {
+    public Integer getMaxPotencyKw() {
         return maxPotencyKw;
     }
 
-    public void setMaxPotencyKw(double maxPotencyKw) {
+    public void setMaxPotencyKw(Integer maxPotencyKw) {
         this.maxPotencyKw = maxPotencyKw;
     }
 
-    public String getExitPotencyV() {
+    public Integer getExitPotencyV() {
         return exitPotencyV;
     }
 
-    public void setExitPotencyV(String exitPotencyV) {
+    public void setExitPotencyV(Integer exitPotencyV) {
         this.exitPotencyV = exitPotencyV;
     }
 
-    public String getEntryPotencyV() {
+    public Integer getEntryPotencyV() {
         return entryPotencyV;
     }
 
-    public void setEntryPotencyV(String entryPotencyV) {
+    public void setEntryPotencyV(Integer entryPotencyV) {
         this.entryPotencyV = entryPotencyV;
     }
 

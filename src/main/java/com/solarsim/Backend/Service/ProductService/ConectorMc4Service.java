@@ -55,7 +55,7 @@ public class ConectorMc4Service implements ProductService {
     }
 
     @Override
-    public Product getProduct(String id) {
+    public Product getProductById(String id) {
         Optional<Product> conector = conectorMc4Repository.findById(id);
         return conector.orElseThrow(() -> new RuntimeException("ConectorMc4 not found"));
     }

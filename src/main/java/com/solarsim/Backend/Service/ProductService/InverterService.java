@@ -55,7 +55,7 @@ public class InverterService implements ProductService {
     }
 
     @Override
-    public Product getProduct(String id) {
+    public Product getProductById(String id) {
         return (Product) inverterRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Inverter not found"));
     }

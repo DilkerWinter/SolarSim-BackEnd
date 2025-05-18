@@ -29,6 +29,7 @@ public class CableService implements ProductService {
         }
     }
 
+
     @Override
     public void updateProduct(Product product) {
         if (product instanceof Cable) {
@@ -55,7 +56,7 @@ public class CableService implements ProductService {
     }
 
     @Override
-    public Product getProduct(String id) {
+    public Product getProductById(String id) {
         Optional<Cable> cable = cableRepository.findById(id);
         return cable.orElseThrow(() -> new RuntimeException("Cable not found"));
     }

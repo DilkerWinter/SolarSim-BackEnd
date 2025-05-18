@@ -55,7 +55,7 @@ public class SolarPanelService implements ProductService {
     }
 
     @Override
-    public Product getProduct(String id) {
+    public Product getProductById(String id) {
         Optional<SolarPanel> panel = solarPanelRepository.findById(id);
         return panel.orElseThrow(() -> new RuntimeException("SolarPanel not found"));
     }
