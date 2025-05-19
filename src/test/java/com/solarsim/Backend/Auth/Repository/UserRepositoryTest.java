@@ -1,4 +1,4 @@
-package com.solarsim.Backend.Repository;
+package com.solarsim.Backend.Auth.Repository;
 
 import com.solarsim.Backend.Model.User.UserDTO.RegisterDTO;
 import com.solarsim.Backend.Model.User.User;

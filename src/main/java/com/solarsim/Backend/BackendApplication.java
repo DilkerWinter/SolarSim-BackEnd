@@ -1,9 +1,5 @@
 package com.solarsim.Backend;
 
-import com.solarsim.Backend.Controller.AuthController;
-import com.solarsim.Backend.Model.User.User;
-import com.solarsim.Backend.Model.User.UserDTO.RegisterDTO;
-import com.solarsim.Backend.Model.User.UserRole;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
