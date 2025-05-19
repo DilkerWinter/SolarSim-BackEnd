@@ -38,28 +38,6 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<Map<ProductType, List<Product>>> getProduct() {
-
-        Map<ProductType, List<Product>> allProducts = new HashMap<>();
-
-        List<Product> cables = cableService.getAllProducts();
-        allProducts.put(ProductType.CABLE, new ArrayList<>(cables));
-
-        List<Product> inverters = inverterService.getAllProducts();
-        allProducts.put(ProductType.INVERTER, new ArrayList<>(inverters));
-
-        List<Product> solarPanels = solarPanelService.getAllProducts();
-        allProducts.put(ProductType.SOLARPANEL, new ArrayList<>(solarPanels));
-
-        List<Product> solarPanelSupports = solarPanelSupportService.getAllProducts();
-        allProducts.put(ProductType.SOLARPANELSUPPORT, new ArrayList<>(solarPanelSupports));
-
-        List<Product> conectors = conectorMc4Service.getAllProducts();
-        allProducts.put(ProductType.CONECTORMC4, new ArrayList<>(conectors));
-
-        return ResponseEntity.ok(allProducts);
-    }
-
     public ResponseEntity<?> getProducts(@RequestParam(required = false) ProductType productType,
                                          @RequestParam(required = false) String id ) {
         if (productType != null && id != null) {
@@ -86,7 +64,7 @@ public class ProductController {
         allProducts.put(ProductType.SOLARPANEL, new ArrayList<>(solarPanels));
 
         List<Product> solarPanelSupports = solarPanelSupportService.getAllProducts();
-        allProducts.put(ProductType.SOLARPANEL, new ArrayList<>(solarPanelSupports));
+        allProducts.put(ProductType.SOLARPANELSUPPORT, new ArrayList<>(solarPanelSupports));
 
         List<Product> conectors = conectorMc4Service.getAllProducts();
         allProducts.put(ProductType.CONECTORMC4, new ArrayList<>(conectors));
