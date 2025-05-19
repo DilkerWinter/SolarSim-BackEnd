@@ -1,67 +1,52 @@
 package com.solarsim.Backend.Service.ProductService;
 
 import com.solarsim.Backend.Model.Product.ConectorMc4;
-import com.solarsim.Backend.Model.Product.Product;
 import com.solarsim.Backend.Repository.ProductRepository.ConectorMc4Repository;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ConectorMc4Service implements ProductService {
+public class ConectorMc4Service {
 
-    @Autowired
-    private ConectorMc4Repository conectorMc4Repository;
+    private final ConectorMc4Repository conectorMc4Repository;
 
     public ConectorMc4Service(ConectorMc4Repository conectorMc4Repository) {
         this.conectorMc4Repository = conectorMc4Repository;
     }
 
-    @Override
-    public void addProduct(Product product) {
-        if (product instanceof ConectorMc4) {
-            ConectorMc4 conector = (ConectorMc4) product;
-            conectorMc4Repository.save(conector);
-        } else {
-            throw new IllegalArgumentException("Product is not of type ConectorMc4");
-        }
+    public List<ConectorMc4> getAllConectorMc4() {
+        return conectorMc4Repository.findAll();
     }
 
-    @Override
-    public void updateProduct(Product product) {
-        if (product instanceof ConectorMc4) {
-            ConectorMc4 conector = (ConectorMc4) product;
-            Optional<ConectorMc4> existing = conectorMc4Repository.findById(conector.getId());
-            if (existing.isPresent()) {
-                conectorMc4Repository.save(conector);
-            } else {
-                throw new RuntimeException("ConectorMc4 not found");
-            }
-        } else {
-            throw new IllegalArgumentException("Product is not of type ConectorMc4");
-        }
+    public Optional<ConectorMc4> getConectorMc4ById(String id) {
+        return conectorMc4Repository.findById(id);
     }
 
-    @Override
-    public void deleteProduct(String id) {
-        Optional<ConectorMc4> conector = conectorMc4Repository.findById(id);
-        if (conector.isPresent()) {
+    @Transactional
+    public void addConectorMc4(ConectorMc4 conectorMc4) {
+        conectorMc4Repository.save(conectorMc4);
+    }
+
+    @Transactional
+    public boolean updateConectorMc4(ConectorMc4 conectorMc4) {
+        Optional<ConectorMc4> conectorMc4Optional = conectorMc4Repository.findById(conectorMc4.getId());
+        if (conectorMc4Optional.isPresent()) {
+            conectorMc4Repository.save(conectorMc4);
+            return true;
+        }
+        return false;
+    }
+
+    @Transactional
+    public boolean deleteConectorMc4(String id) {
+        Optional<ConectorMc4> conectorMc4Optional = conectorMc4Repository.findById(id);
+        if (conectorMc4Optional.isPresent()) {
             conectorMc4Repository.deleteById(id);
-        } else {
-            throw new RuntimeException("ConectorMc4 not found");
+            return true;
         }
-    }
-
-    @Override
-    public Product getProductById(String id) {
-        Optional<ConectorMc4> conector = conectorMc4Repository.findById(id);
-        return conector.orElseThrow(() -> new RuntimeException("ConectorMc4 not found"));
-    }
-
-    @Override
-    public List<Product> getAllProducts() {
-        return (List<Product>) (List<?>) conectorMc4Repository.findAll();
+        return false;
     }
 }

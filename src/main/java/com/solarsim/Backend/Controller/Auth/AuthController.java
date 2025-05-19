@@ -1,4 +1,4 @@
-package com.solarsim.Backend.Controller;
+package com.solarsim.Backend.Controller.Auth;
 
 import com.solarsim.Backend.Model.User.UserDTO.AuthDTO;
 import com.solarsim.Backend.Model.User.UserDTO.LoginResponseDTO;

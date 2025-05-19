@@ -1,67 +1,52 @@
 package com.solarsim.Backend.Service.ProductService;
 
 import com.solarsim.Backend.Model.Product.SolarPanelSupport;
-import com.solarsim.Backend.Model.Product.Product;
 import com.solarsim.Backend.Repository.ProductRepository.SolarPanelSupportRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class SolarPanelSupportService implements ProductService {
+public class SolarPanelSupportService {
 
-    @Autowired
-    private SolarPanelSupportRepository solarPanelSupportRepository;
+    private final SolarPanelSupportRepository supportRepository;
 
-    public SolarPanelSupportService(SolarPanelSupportRepository solarPanelSupportRepository) {
-        this.solarPanelSupportRepository = solarPanelSupportRepository;
+    public SolarPanelSupportService(SolarPanelSupportRepository supportRepository) {
+        this.supportRepository = supportRepository;
     }
 
-    @Override
-    public void addProduct(Product product) {
-        if (product instanceof SolarPanelSupport) {
-            SolarPanelSupport support = (SolarPanelSupport) product;
-            solarPanelSupportRepository.save(support);
-        } else {
-            throw new IllegalArgumentException("Product is not of type SolarPanelSupport");
+    public List<SolarPanelSupport> getAllSupports() {
+        return supportRepository.findAll();
+    }
+
+    public Optional<SolarPanelSupport> getSupportById(String id) {
+        return supportRepository.findById(id);
+    }
+
+    @Transactional
+    public void addSupport(SolarPanelSupport support) {
+        supportRepository.save(support);
+    }
+
+    @Transactional
+    public boolean updateSupport(SolarPanelSupport support) {
+        Optional<SolarPanelSupport> existing = supportRepository.findById(support.getId());
+        if (existing.isPresent()) {
+            supportRepository.save(support);
+            return true;
         }
+        return false;
     }
 
-    @Override
-    public void updateProduct(Product product) {
-        if (product instanceof SolarPanelSupport) {
-            SolarPanelSupport support = (SolarPanelSupport) product;
-            Optional<SolarPanelSupport> existing = solarPanelSupportRepository.findById(support.getId());
-            if (existing.isPresent()) {
-                solarPanelSupportRepository.save(support);
-            } else {
-                throw new RuntimeException("SolarPanelSupport not found");
-            }
-        } else {
-            throw new IllegalArgumentException("Product is not of type SolarPanelSupport");
+    @Transactional
+    public boolean deleteSupport(String id) {
+        Optional<SolarPanelSupport> existing = supportRepository.findById(id);
+        if (existing.isPresent()) {
+            supportRepository.deleteById(id);
+            return true;
         }
-    }
-
-    @Override
-    public void deleteProduct(String id) {
-        Optional<SolarPanelSupport> support = solarPanelSupportRepository.findById(id);
-        if (support.isPresent()) {
-            solarPanelSupportRepository.deleteById(id);
-        } else {
-            throw new RuntimeException("SolarPanelSupport not found");
-        }
-    }
-
-    @Override
-    public Product getProductById(String id) {
-        Optional<SolarPanelSupport> support = solarPanelSupportRepository.findById(id);
-        return support.orElseThrow(() -> new RuntimeException("SolarPanelSupport not found"));
-    }
-
-    @Override
-    public List<Product> getAllProducts() {
-        return (List<Product>) (List<?>) solarPanelSupportRepository.findAll();
+        return false;
     }
 }

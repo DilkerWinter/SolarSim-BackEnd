@@ -1,68 +1,54 @@
 package com.solarsim.Backend.Service.ProductService;
 
 import com.solarsim.Backend.Model.Product.Cable;
-import com.solarsim.Backend.Model.Product.Product;
 import com.solarsim.Backend.Repository.ProductRepository.CableRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CableService implements ProductService {
+public class CableService {
 
-    @Autowired
-    private CableRepository cableRepository;
+    private final CableRepository cableRepository;
 
     public CableService(CableRepository cableRepository) {
         this.cableRepository = cableRepository;
     }
 
-    @Override
-    public void addProduct(Product product) {
-        if (product instanceof Cable) {
-            Cable cable = (Cable) product;
+    public List<Cable> getAllCables() {
+        return cableRepository.findAll();
+    }
+
+    public Optional<Cable> getCableById(String id) {
+        return cableRepository.findById(id);
+    }
+
+    @Transactional
+    public void addCable(Cable cable) {
+        cableRepository.save(cable);
+    }
+
+    @Transactional
+    public boolean updateCable(Cable cable) {
+        Optional<Cable> cableOptional = cableRepository.findById(cable.getId());
+        if (cableOptional.isPresent()) {
             cableRepository.save(cable);
-        } else {
-            throw new IllegalArgumentException("Product is not of type Cable");
+            return true;
         }
+        return false;
     }
 
-
-    @Override
-    public void updateProduct(Product product) {
-        if (product instanceof Cable) {
-            Cable cable = (Cable) product;
-            Optional<Cable> existingCable = cableRepository.findById(cable.getId());
-            if (existingCable.isPresent()) {
-                cableRepository.save(cable);
-            } else {
-                throw new RuntimeException("Cable not found");
-            }
-        } else {
-            throw new IllegalArgumentException("Product is not of type Cable");
-        }
-    }
-
-    @Override
-    public void deleteProduct(String id) {
-        Optional<Cable> cable = cableRepository.findById(id);
-        if (cable.isPresent()) {
+    @Transactional
+    public boolean deleteCable(String id) {
+        Optional<Cable> cableOptional = cableRepository.findById(id);
+        if (cableOptional.isPresent()) {
             cableRepository.deleteById(id);
-        } else {
-            throw new RuntimeException("Cable not found");
+            return true;
         }
+        return false;
     }
 
-    @Override
-    public Product getProductById(String id) {
-        Optional<Cable> cable = cableRepository.findById(id);
-        return cable.orElseThrow(() -> new RuntimeException("Cable not found"));
-    }
-
-    @Override
-    public List<Product> getAllProducts() {
-        return (List<Product>) (List<?>) cableRepository.findAll();
-    }
 }

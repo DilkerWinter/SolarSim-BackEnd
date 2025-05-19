@@ -1,67 +1,52 @@
 package com.solarsim.Backend.Service.ProductService;
 
 import com.solarsim.Backend.Model.Product.SolarPanel;
-import com.solarsim.Backend.Model.Product.Product;
 import com.solarsim.Backend.Repository.ProductRepository.SolarPanelRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class SolarPanelService implements ProductService {
+public class SolarPanelService {
 
-    @Autowired
-    private SolarPanelRepository solarPanelRepository;
+    private final SolarPanelRepository solarPanelRepository;
 
     public SolarPanelService(SolarPanelRepository solarPanelRepository) {
         this.solarPanelRepository = solarPanelRepository;
     }
 
-    @Override
-    public void addProduct(Product product) {
-        if (product instanceof SolarPanel) {
-            SolarPanel panel = (SolarPanel) product;
-            solarPanelRepository.save(panel);
-        } else {
-            throw new IllegalArgumentException("Product is not of type SolarPanel");
-        }
+    public List<SolarPanel> getAllSolarPanels() {
+        return solarPanelRepository.findAll();
     }
 
-    @Override
-    public void updateProduct(Product product) {
-        if (product instanceof SolarPanel) {
-            SolarPanel panel = (SolarPanel) product;
-            Optional<SolarPanel> existing = solarPanelRepository.findById(panel.getId());
-            if (existing.isPresent()) {
-                solarPanelRepository.save(panel);
-            } else {
-                throw new RuntimeException("SolarPanel not found");
-            }
-        } else {
-            throw new IllegalArgumentException("Product is not of type SolarPanel");
-        }
+    public Optional<SolarPanel> getSolarPanelById(String id) {
+        return solarPanelRepository.findById(id);
     }
 
-    @Override
-    public void deleteProduct(String id) {
-        Optional<SolarPanel> panel = solarPanelRepository.findById(id);
-        if (panel.isPresent()) {
+    @Transactional
+    public void addSolarPanel(SolarPanel solarPanel) {
+        solarPanelRepository.save(solarPanel);
+    }
+
+    @Transactional
+    public boolean updateSolarPanel(SolarPanel solarPanel) {
+        Optional<SolarPanel> optional = solarPanelRepository.findById(solarPanel.getId());
+        if (optional.isPresent()) {
+            solarPanelRepository.save(solarPanel);
+            return true;
+        }
+        return false;
+    }
+
+    @Transactional
+    public boolean deleteSolarPanel(String id) {
+        Optional<SolarPanel> optional = solarPanelRepository.findById(id);
+        if (optional.isPresent()) {
             solarPanelRepository.deleteById(id);
-        } else {
-            throw new RuntimeException("SolarPanel not found");
+            return true;
         }
-    }
-
-    @Override
-    public Product getProductById(String id) {
-        Optional<SolarPanel> panel = solarPanelRepository.findById(id);
-        return panel.orElseThrow(() -> new RuntimeException("SolarPanel not found"));
-    }
-
-    @Override
-    public List<Product> getAllProducts() {
-        return (List<Product>) (List<?>) solarPanelRepository.findAll();
+        return false;
     }
 }
