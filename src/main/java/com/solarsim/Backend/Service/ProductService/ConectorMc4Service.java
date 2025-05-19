@@ -33,7 +33,7 @@ public class ConectorMc4Service implements ProductService {
     public void updateProduct(Product product) {
         if (product instanceof ConectorMc4) {
             ConectorMc4 conector = (ConectorMc4) product;
-            Optional<Product> existing = conectorMc4Repository.findById(conector.getId());
+            Optional<ConectorMc4> existing = conectorMc4Repository.findById(conector.getId());
             if (existing.isPresent()) {
                 conectorMc4Repository.save(conector);
             } else {
@@ -46,7 +46,7 @@ public class ConectorMc4Service implements ProductService {
 
     @Override
     public void deleteProduct(String id) {
-        Optional<Product> conector = conectorMc4Repository.findById(id);
+        Optional<ConectorMc4> conector = conectorMc4Repository.findById(id);
         if (conector.isPresent()) {
             conectorMc4Repository.deleteById(id);
         } else {
@@ -56,7 +56,7 @@ public class ConectorMc4Service implements ProductService {
 
     @Override
     public Product getProductById(String id) {
-        Optional<Product> conector = conectorMc4Repository.findById(id);
+        Optional<ConectorMc4> conector = conectorMc4Repository.findById(id);
         return conector.orElseThrow(() -> new RuntimeException("ConectorMc4 not found"));
     }
 
