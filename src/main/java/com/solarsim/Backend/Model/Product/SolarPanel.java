@@ -3,60 +3,130 @@ package com.solarsim.Backend.Model.Product;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
-import java.util.Objects;
-
 @Entity
 public class SolarPanel extends Product {
-    @Column(name = "potency_kilo_watts")
-    private Integer potencyKiloWatts;
-    @Column(name = "potency_voltage")
-    private Integer potencyVoltage;
-    private Integer height;
-    private Integer width;
 
-    public SolarPanel(String name, String description, Integer price, String brand,
-                      Integer potencyKiloWatts, Integer potencyVoltage,
-                      Integer height, Integer width) {
-        super(name, description, price, brand);
-        this.potencyKiloWatts = potencyKiloWatts;
-        this.potencyVoltage = potencyVoltage;
-        this.height = height;
-        this.width = width;
-    }
+    @Column(name = "potency_watts")
+    private Integer potencyWatts; // Potência nominal em watts (ex: 2440)
+
+    @Column(name = "efficiency_per_mille")
+    private Integer efficiencyPerMille; // Eficiência em partes por mil (ex: 850 = 85.0%)
+
+    @Column(name = "avg_daily_energy_wh")
+    private Integer avgDailyEnergyWh; // Energia média diária gerada em Wh (ex: 292000 Wh = 292 kWh)
+
+    @Column(name = "self_consumption_watts")
+    private Integer selfConsumptionWatts; // Consumo próprio da placa em watts
+
+    @Column(name = "max_operating_temp_c")
+    private Integer maxOperatingTempC; // Temperatura máxima de operação em °C
+
+    @Column(name = "height_meters")
+    private Integer heightMeters; // Altura da placa em metros
+
+    @Column(name = "width_meters")
+    private Integer widthMeters; // Largura da placa em metros
+
+    @Column(name = "operating_voltage")
+    private Integer operatingVoltage; // 110V ou 220V
+
+    @Column(name = "weight_kilograms")
+    private Integer weightKg; // Peso da placa em kg
 
     public SolarPanel() {
-
+        super();
     }
 
-    public Integer getPotencyKiloWatts() {
-        return potencyKiloWatts;
+    public SolarPanel(String name, String description, Integer price, String brand,
+                      Integer potencyWatts, Integer efficiencyPerMille, Integer avgDailyEnergyWh,
+                      Integer selfConsumptionWatts, Integer maxOperatingTempC,
+                      Integer heightMeters, Integer widthMeters, Integer weightKg, Integer operatingVoltage) {
+        super(name, description, price, brand);
+        this.potencyWatts = potencyWatts;
+        this.efficiencyPerMille = efficiencyPerMille;
+        this.avgDailyEnergyWh = avgDailyEnergyWh;
+        this.selfConsumptionWatts = selfConsumptionWatts;
+        this.maxOperatingTempC = maxOperatingTempC;
+        this.heightMeters = heightMeters;
+        this.widthMeters = widthMeters;
+        this.weightKg = weightKg;
+        setOperatingVoltage(operatingVoltage);
     }
 
-    public void setPotencyKiloWatts(Integer potencyKiloWatts) {
-        this.potencyKiloWatts = potencyKiloWatts;
+    // Getters e Setters
+
+    public Integer getPotencyWatts() {
+        return potencyWatts;
     }
 
-    public Integer getPotencyVoltage() {
-        return potencyVoltage;
+    public void setPotencyWatts(Integer potencyWatts) {
+        this.potencyWatts = potencyWatts;
     }
 
-    public void setPotencyVoltage(Integer potencyVoltage) {
-        this.potencyVoltage = potencyVoltage;
+    public Integer getEfficiencyPerMille() {
+        return efficiencyPerMille;
     }
 
-    public Integer getHeight() {
-        return height;
+    public void setEfficiencyPerMille(Integer efficiencyPerMille) {
+        this.efficiencyPerMille = efficiencyPerMille;
     }
 
-    public void setHeight(Integer height) {
-        this.height = height;
+    public Integer getAvgDailyEnergyWh() {
+        return avgDailyEnergyWh;
     }
 
-    public Integer getWidth() {
-        return width;
+    public void setAvgDailyEnergyWh(Integer avgDailyEnergyWh) {
+        this.avgDailyEnergyWh = avgDailyEnergyWh;
     }
 
-    public void setWidth(Integer width) {
-        this.width = width;
+    public Integer getSelfConsumptionWatts() {
+        return selfConsumptionWatts;
+    }
+
+    public void setSelfConsumptionWatts(Integer selfConsumptionWatts) {
+        this.selfConsumptionWatts = selfConsumptionWatts;
+    }
+
+    public Integer getMaxOperatingTempC() {
+        return maxOperatingTempC;
+    }
+
+    public void setMaxOperatingTempC(Integer maxOperatingTempC) {
+        this.maxOperatingTempC = maxOperatingTempC;
+    }
+
+    public Integer getHeightMeters() {
+        return heightMeters;
+    }
+
+    public void setHeightMeters(Integer heightMeters) {
+        this.heightMeters = heightMeters;
+    }
+
+    public Integer getWidthMeters() {
+        return widthMeters;
+    }
+
+    public void setWidthMeters(Integer widthMeters) {
+        this.widthMeters = widthMeters;
+    }
+
+    public Integer getOperatingVoltage() {
+        return operatingVoltage;
+    }
+
+    public void setOperatingVoltage(Integer operatingVoltage) {
+        if (operatingVoltage != null && operatingVoltage != 110 && operatingVoltage != 220) {
+            throw new IllegalArgumentException("Operating Voltage must be 110V or 220V.");
+        }
+        this.operatingVoltage = operatingVoltage;
+    }
+
+    public Integer getWeightKg() {
+        return weightKg;
+    }
+
+    public void setWeightKg(Integer weightKg) {
+        this.weightKg = weightKg;
     }
 }
